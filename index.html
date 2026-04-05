@@ -481,6 +481,77 @@ const SOURCES = [
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════════
+// CENSUS FIELD LABELS (English → Hebrew, from מפקד-2022 variable list)
+// ═══════════════════════════════════════════════════════════════════════════════
+const CENSUS_LABELS = {
+  "LocNameHeb": "שם יישוב",
+  "LocalityCode": "סמל יישוב",
+  "StatArea": "אזור סטטיסטי",
+  "StatAreaCmb": "שם אזור סטטיסטי",
+  "pop_approx": "סך הכל אוכלוסייה",
+  "change_pcnt": "אחוז שינוי ממפקד האוכלוסין 2008",
+  "pop_density": 'צפיפות אוכלוסייה (לקמ"ר)',
+  "religion": "סמל דת עיקרית",
+  "ReligionHeb": "שם דת עיקרית",
+  "sexRatio": "יחס מינים",
+  "inst_pcnt": "אחוז דיירי מוסדות",
+  "Foreign_pcnt": "אחוז זרים",
+  "age0_19_pcnt": "אחוז בני 19-0",
+  "age20_64_pcnt": "אחוז בני 64-20",
+  "age65_pcnt": "אחוז בני 65 ומעלה",
+  "DependencyRatio": "יחס תלות לאלף נפשות",
+  "age_median": "גיל חציוני",
+  "m_age_median": "גיל חציוני - זכרים",
+  "w_age_median": "גיל חציוני - נקבות",
+  "married18_34_pcnt": "אחוז נשואים בני 34-18",
+  "married45_54_pcnt": "אחוז נשואים בני 54-45",
+  "j_isr_pcnt": 'יהודים ואחרים ילידי ישראל',
+  "j_abr_pcnt": 'יהודים ואחרים ילידי חו"ל',
+  "aliya2002_pcnt": "אחוז יהודים ואחרים שעלו משנת 2002 ואילך",
+  "aliya2010_pcnt": "אחוז יהודים ואחרים שעלו משנת 2010 ואילך",
+  "israel_pcnt": "אחוז יהודים ואחרים שיבשת מוצאם ישראל",
+  "asia_pcnt": "אחוז יהודים ואחרים שיבשת מוצאם אסיה",
+  "africa_pcnt": "אחוז יהודים ואחרים שיבשת מוצאם אפריקה",
+  "europe_pcnt": "אחוז יהודים ואחרים שיבשת מוצאם אירופה",
+  "america_pcnt": "אחוז יהודים ואחרים שיבשת מוצאם אמריקה ואוקיאניה",
+  "shem_eretz1": "שם ארץ מוצא עיקרית",
+  "MarriageAge_mdn": "גיל נישואין חציוני",
+  "m_MarriageAge_mdn": "גיל נישואין חציוני - זכרים",
+  "w_MarriageAge_mdn": "גיל נישואין חציוני - נקבות",
+  "ChldBorn_avg": "מספר ילדים ממוצע לאישה עד המועד הקובע",
+  "koshi5_pcnt": "אחוז בני 5 ומעלה המתקשים מאוד או אינם יכולים כלל",
+  "koshi65_pcnt": "אחוז בני 65 ומעלה המתקשים מאוד או אינם יכולים כלל",
+  "hh_total_approx": "סך הכל משקי בית",
+  "size_avg": "ממוצע נפשות במשק הבית",
+  "hh0_5_pcnt": "אחוז משקי הבית שבהם בני 5-0",
+  "hh18_24_pcnt": "אחוז משקי הבית שבהם בני 25-18",
+  "hh_MidatDatiyut": "סמל אורח חיים עיקרי למשק בית",
+  "hh_MidatDatiyut_Name": "שם אורח חיים עיקרי למשק בית",
+  "Computer_avg": "ממוצע מחשבים במשק הבית",
+  "Vehicle0_pcnt": "אחוז משקי הבית שלא עומד לרשותם כלי רכב",
+  "Vehicle2up_pcnt": "אחוז משקי הבית שעומדים לרשותם שני כלי רכב ויותר",
+  "Parking_pcnt": "אחוז משקי הבית שעומדת לרשותם חנייה",
+  "own_pcnt": "אחוז משקי הבית הגרים בדירה בבעלות",
+  "rent_pcnt": "אחוז משקי הבית הגרים בדירה בשכירות",
+  "AcadmCert_pcnt": "אחוז בני 15 ומעלה בעלי השכלה אקדמית",
+  "WrkY_pcnt": "אחוז בני 15 ומעלה שעבדו ב-12 החודשים שקדמו למועד הקובע",
+  "Empl_pcnt": "אחוז שכירים",
+  "SelfEmpl_pcnt": "אחוז עצמאים",
+  "HrsWrkWk_avg": "ממוצע שעות עבודה שבועיות",
+  "Wrk_15_17_pcnt": "אחוז בני 17-15 שעבדו ב-12 החודשים שקדמו למועד הקובע",
+  "WrkOutLoc_pcnt": "אחוז עובדים מחוץ ליישוב המגורים",
+  "employeesAnnual_medWage": "הכנסה חציונית שנתית מעבודה של שכירים",
+  "EmployeesWage_decile9Up": "אחוז שכירים בני 15 ומעלה בעשירוני הכנסה 9-10",
+  "SelfEmployedAnnual_medWage": "הכנסה חציונית שנתית מעבודה של עצמאים",
+  "SelfEmployedWage_decile9Up": "אחוז עצמאים בני 15 ומעלה בעשירוני הכנסה 9-10",
+};
+
+function fieldLabel(id, sourceKey) {
+  if (sourceKey === 'census') return CENSUS_LABELS[id] || id;
+  return id;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════════════════════════════
 const S = {
@@ -783,12 +854,14 @@ function renderExtraSlots() {
           <button class="btn" onclick="extraCheckAll(${idx},false)">נקה הכל</button>
         </div>
         <div class="extra-col-grid">
-          ${es.fields.map((f, i) => `
-            <label class="col-cb">
+          ${es.fields.map((f, i) => {
+            const lbl = fieldLabel(f.id, es.key);
+            return `<label class="col-cb">
               <input type="checkbox" class="extra-col-inp" data-eidx="${idx}" data-fidx="${i}" ${es.checked.has(f.id) ? 'checked' : ''}>
-              <span class="col-fn">${h(f.id)}</span>
+              <span class="col-fn">${h(lbl)}</span>
               <span class="col-ft">${h(f.type || '')}</span>
-            </label>`).join('')}
+            </label>`;
+          }).join('')}
         </div>` : ''}
     </div>`;
   }).join('');
@@ -914,9 +987,10 @@ function renderColumns() {
   document.getElementById('colGrid').innerHTML = S.fields.map((f, i) => {
     const isDefault = defs.some(d => d === f.id);
     if (isDefault) S.checked.add(f.id);
+    const lbl = fieldLabel(f.id, S.source?.key);
     return `<label class="col-cb">
       <input type="checkbox" class="col-inp" data-idx="${i}" ${isDefault ? 'checked' : ''}>
-      <span class="col-fn">${h(f.id)}</span>
+      <span class="col-fn">${h(lbl)}</span>
       <span class="col-ft">${h(f.type || '')}</span>
     </label>`;
   }).join('');
@@ -1099,10 +1173,15 @@ async function downloadExcel() {
       ? S.source.shortLabel
       : activeExtras[idx].source.shortLabel;
 
+    const getSrcKey = idx => idx === 'primary'
+      ? S.source?.key
+      : activeExtras[idx]?.source?.key;
+
     colSpecs.forEach(c => {
+      const base = fieldLabel(c.originalId, getSrcKey(c.srcIdx));
       c.displayName = nameCounts[c.originalId] > 1
-        ? `${c.originalId} (${srcLabel(c.srcIdx)})`
-        : c.originalId;
+        ? `${base} (${srcLabel(c.srcIdx)})`
+        : base;
     });
 
     // ── Build lookup maps for extra sources (cityCode → record) ──────────────
