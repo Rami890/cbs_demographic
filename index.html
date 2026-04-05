@@ -1133,8 +1133,14 @@ async function downloadExcel() {
     ws['!cols'] = headers.map(c => ({ wch: Math.max(c.length * 1.9, 10) }));
     XLSX.utils.book_append_sheet(wb, ws, 'נתונים');
 
-    const today = new Date().toISOString().slice(0, 10);
-    const fname = `נתוני_אוכלוסין_${S.source.fileLbl}_${today}.xlsx`;
+    const now = new Date();
+    const ts = now.getFullYear()
+      + String(now.getMonth()+1).padStart(2,'0')
+      + String(now.getDate()).padStart(2,'0')
+      + '_'
+      + String(now.getHours()).padStart(2,'0')
+      + String(now.getMinutes()).padStart(2,'0');
+    const fname = `cbs_demo_${ts}.xlsx`;
     XLSX.writeFile(wb, fname);
 
     setDlStatus('success',
